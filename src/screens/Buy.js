@@ -1,63 +1,51 @@
-import React,{useState} from 'react';
-import { StyleSheet,View,Text,TextInput,Button,Image,TouchableOpacity} from 'react-native';
-import MoneyImg from '../../assets/money.png';
-import Transaction from '../components/Transaction';
-const Login=({navigation})=>{
-    
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError]=useState(false);
-    const login=()=>{
-        if(email == 'persistent' || email== 'Persistent' && password == 'persistent'){
-            console.log('Logged In!');
-            setError(false);
-            navigation.navigate('Dashboard');
-        }else{
-            console.log('Log in failed!');
-            setError(true);
-        }
-    }
+import React from 'react';
+import {View,Text,TextInput,StyleSheet,Image,TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Fontisto';
+const Buy=()=>{
     return(
         <View style={styles.container}>
-        
+         <View style={styles.amountContainer}>
+           <View style={{flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}> 
+                                    <Text style={styles.wallet}>Balance Available <Icon name="wallet" size={15} color="#fff" /></Text>
+                               
+                                  <Text style={styles.walletAmt}>$100</Text>
+                        </View>
+                
+            </View>
         <View >
-        <Image style={styles.moneyImg} source={MoneyImg}/>
+        {/* <Image style={styles.moneyImg} source={MoneyImg}/> */}
             <View style={styles.formArea}>
-            <Text style={styles.heading}>Login Page</Text>
-            {error?<Text style={styles.errorMessage}>Incorrect username or password</Text>:null}
+            <Text style={styles.heading}>Buy</Text>
+            
             <View style={styles.inputView}>
             <TextInput
                 style={styles.TextInput}
-                placeholder="Email"
+                placeholder="Wallet ID"
                 placeholderTextColor="#003f5c"
-                onChangeText={(email) => setEmail(email)}
             />
             </View>
             
             <View style={styles.inputView}>
             <TextInput
                 style={styles.TextInput}
-                placeholder="Password"
+                placeholder="Amount to Buy"
                 placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                onChangeText={(password) => setPassword(password)}
             />
             </View>
-            <TouchableOpacity onPress={()=>login()} style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
+            <TouchableOpacity  style={styles.loginBtn}>
+                <Text style={styles.loginText}>Buy</Text>
             </TouchableOpacity>
             </View>
         </View>
         </View>
     )
-}
+};
 
 const styles=StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: '#d9ecff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         flexDirection:'column'
     },
     topRow:{
@@ -82,7 +70,9 @@ const styles=StyleSheet.create({
         position:'relative',
         backgroundColor:'white',
         borderRadius:10,
-        marginBottom:30
+        marginBottom:30,
+        width:'95%',
+        alignSelf:'center'
     },
     inputView: {
         backgroundColor: "#fff",
@@ -117,7 +107,29 @@ const styles=StyleSheet.create({
         },
         errorMessage:{
             color:'#a30021'
-        }
+        },
+        walletAmt:{
+            color:'white',
+            fontSize:30,
+            paddingTop:5,
+            textAlign:'center',
+            alignSelf:'center',
+        },
+        amountContainer:{
+            minHeight:100,
+            padding:10,
+            textAlign:'center',
+            width:'100%',
+            alignItems:'center',
+            justifyContent:'center',
+            backgroundColor:'#0057ad',
+            marginBottom:30
+        },
+        wallet:{
+            color:'white',
+            textAlign:'center',
+            opacity:0.9
+        },
 });
 
-export default Login;
+export default Buy;
